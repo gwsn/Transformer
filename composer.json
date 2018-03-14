@@ -1,0 +1,38 @@
+{
+  "name": "gwsn/lumen-transformer",
+  "description": "Data Transformer for Lumen and Laravel",
+  "keywords": ["laravel","lumen", "mapping", "API Response", "Transformer"],
+  "license": "MIT",
+  "homepage": "https://www.globalwebsystems.nl",
+  "authors": [
+    {
+      "name": "J.N. Overmars",
+      "email": "support@gwsn.nl",
+      "homepage": "https://www.globalwebsystems.nl"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "illuminate/support": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x|5.6.x",
+    "illuminate/filesystem": "5.0.x|5.1.x|5.2.x|5.3.x|5.4.x|5.5.x|5.6.x"
+  },
+  "autoload": {
+    "psr-4": {
+      "Gwsn\\LumenTransformer\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.1-dev"
+    },
+    "laravel": {
+      "providers": [
+        "Gwsn\\LumenTransformer\\ServiceProvider"
+      ],
+      "aliases": {
+        "Transformer": "Gwsn\\LumenTransformer\\Facades\\Transformer"
+      }
+    }
+  },
+  "minimum-stability": "dev"
+}
