@@ -1,10 +1,13 @@
 <?php
-namespace Gwsn\LumenTransformer\Models;
+namespace Gwsn\Transformer\Models;
+
+use Gwsn\Transformer\Mapping\DefaultMapping;
+use Gwsn\Transformer\Mapping\MappingInterface;
 
 /**
  * Class Transformer
  *
- * @package Gwsn\LumenTransformer\Models
+ * @package Gwsn\Transformer\Models
  */
 class Transformer
 {

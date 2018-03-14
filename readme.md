@@ -4,27 +4,13 @@
 
 Require this package
 ```
-composer require gwsn/lumen-transformer
+composer require gwsn/transformer
 ```
-
-## Laravel
-After installing this package, add the ServiceProvider to the providers array in config/app.php
-```
-Gwsn\LumenTransformer\ServiceProvider::class,
-```
-
-
-## Lumen
-After installing this package, add the ServiceProvider to the providers array in bootstrap/app.php
-```
-$app->register('Gwsn\LumenTransformer\ServiceProvider');
-```
-
 
 ## Usage Examples
-Include the Transformer class with the fascade:
+Include the Transformer class:
 
-`use Gwsn\LumenTransformer\Models\Transformer;`
+`use Gwsn\Transformer\Transformer;`
 
 Our sample source:
 ```
@@ -51,7 +37,6 @@ $source = [
 ```
 
 ### Simple usage
-`use Gwsn\LumenTransformer\src\Models\Transformer;`
 
 ```
 $mapping = [
@@ -66,7 +51,6 @@ $target = Transformer::run($source, Transformer::BuildMapping($mapping));
 
 
 ### Array to Object
-
 
 ```
 $mapping = [
@@ -90,10 +74,8 @@ $target = Transformer::run($source, Transformer::BuildMapping($mapping), new Dum
 ```
 
 ### Array to Array
-`use Gwsn\LumenTransformer\Models\Transformer;`
 
 ```
-
 $mapping = [
     'guid' => 'id',
     'slug' => 'name',
@@ -107,10 +89,7 @@ $target = Transformer::run($source, Transformer::BuildMapping($mapping), []);
 
 ### Mappings
 
-`use Gwsn\LumenTransformer\Models\Transformer;`
-
 ```
-
 $mapping = [
     'guid' => 'id',
     'slug' => 'name',

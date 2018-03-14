@@ -1,5 +1,5 @@
 <?php
-namespace Gwsn\LumenTransformer\Models;
+namespace Gwsn\Transformer\Mapping;
 
 
 class DefaultMapping extends BaseMapping implements MappingInterface
