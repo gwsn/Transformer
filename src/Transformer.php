@@ -1,5 +1,5 @@
 <?php
-namespace Gwsn\Transformer\Models;
+namespace Gwsn\Transformer;
 
 use Gwsn\Transformer\Mapping\DefaultMapping;
 use Gwsn\Transformer\Mapping\MappingInterface;
@@ -7,7 +7,7 @@ use Gwsn\Transformer\Mapping\MappingInterface;
 /**
  * Class Transformer
  *
- * @package Gwsn\Transformer\Models
+ * @package Gwsn\Transformer
  */
 class Transformer
 {

@@ -19,5 +19,5 @@
       "Gwsn\\Transformer\\": "src/"
     }
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "stable"
 }
