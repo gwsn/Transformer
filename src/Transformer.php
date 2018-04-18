@@ -61,6 +61,10 @@ class Transformer
             $source = json_decode(json_encode($source), true);
         }
 
+        if(is_object($output)) {
+            $output = clone $output;
+        }
+
         return self::transformData($source, $mapping, $output);
     }
 
