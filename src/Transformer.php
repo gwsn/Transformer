@@ -90,8 +90,11 @@ class Transformer
             // Check if Callback Exists
             if (is_array($value) && count($value) >= 2) {
                 $search = $value[0];
-                if(is_callable($mapping, $value[1])) {
+                if(is_callable($value[1])) {
                     $callback = $value[1];
+                }
+                if(is_callable([$mapping, $value[1]])) {
+                    $callback = [$mapping, $value[1]];
                 }
 
             } elseif(is_array($value) && count($value) === 1) {
@@ -111,7 +114,7 @@ class Transformer
             // Check if there need to be a callback.
             if(!empty($found)) {
                 if(!empty($callback)) {
-                    $data[$key] = call_user_func([$mapping, $callback], $found, $source);
+                    $data[$key] = call_user_func($callback, $found, $source);
                 } else {
                     $data[$key] = $found;
                 }
