@@ -46,7 +46,7 @@ class Transformer
      */
     public static function runOnce($source = null, MappingInterface $mapping, $output = null) {
         if(!is_object($source) && !is_array($source)) {
-            throw new \InvalidArgumentException('The parameter Source should be a Object or Array '.typeOf($source).' is not a valid type.');
+            throw new \InvalidArgumentException('The parameter Source should be a Object or Array, '.gettype($source).' is not a valid type.');
         }
 
         if(empty($mapping->getMapping())) {
