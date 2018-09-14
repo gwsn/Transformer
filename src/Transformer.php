@@ -122,7 +122,7 @@ class Transformer
             }
 
             // Check if there need to be a callback.
-            if(!empty($found)) {
+            if(!is_null($found)) {
                 if(!empty($callback)) {
                     $data[$key] = call_user_func($callback, $found, $source);
                 } else {
