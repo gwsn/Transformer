@@ -128,7 +128,10 @@ class Transformer
                 } else {
                     $data[$key] = $found;
                 }
+            } else {
+                $data[$key] = null;
             }
+
         }
 
         if(is_object($output)) {
