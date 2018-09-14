@@ -57,10 +57,6 @@ class Transformer
             $output = [];
         }
 
-        if(is_object($source)) {
-            $source = json_decode(json_encode($source), true);
-        }
-
         if(is_object($output)) {
             $output = clone $output;
         }
@@ -77,7 +73,7 @@ class Transformer
      *
      * @return mixed
      */
-    private static function transformData(Array $source, MappingInterface $mapping, $output) {
+    private static function transformData($source, MappingInterface $mapping, $output) {
         $data = [];
         $mappingArray = $mapping->getMapping();
 
@@ -85,6 +81,7 @@ class Transformer
             $callback = null;
             $found = null;
             $search = null;
+            $sourceType = gettype($source);
 
             // Set Default value
             if(is_array($value) && count($value) === 3) {
@@ -108,11 +105,20 @@ class Transformer
                 $search = $value;
             }
 
-            // Get the value key form original data
-            if(strpos( (string) $search, '.') !== false) {
-                $found = self::arrayGet($source, $search);
-            } elseif($search !== null && isset($source[$search])) {
-                $found = $source[$search];
+            if($sourceType === 'object') {
+                // Get the value key form original data
+                if(strpos( (string) $search, '.') !== false) {
+                    $found = self::objectGet($source, $search);
+                } elseif($search !== null && property_exists($source, $search)) {
+                    $found = self::objectGet($source, $search);
+                }
+            } else {
+                // Get the value key form original data
+                if(strpos( (string) $search, '.') !== false) {
+                    $found = self::arrayGet($source, $search);
+                } elseif($search !== null && isset($source[$search])) {
+                    $found = $source[$search];
+                }
             }
 
             // Check if there need to be a callback.
@@ -172,6 +178,27 @@ class Transformer
      */
     private static function createMethodNames($key, $prefix = 'set') {
         return $prefix.str_replace(' ', '', ucwords(strtolower(str_replace('_', ' ',$key))));
+    }
+
+    private static function objectGet($object, $key, $default = null) {
+        if (is_null($key))
+            return $object;
+
+        $method = self::createMethodNames($key, 'get');
+
+        if(property_exists($object, $key) && is_callable([$object, $method]))
+            return call_user_func([$object, $method]);
+
+        foreach (explode('.', $key) as $segment) {
+            $segmentMethod = self::createMethodNames($segment, 'get');
+
+            if(property_exists($object, $segment) && !is_callable([$object, $segmentMethod]))
+                return $default;
+
+            $object = call_user_func([$object, $segmentMethod]);
+        }
+
+        return $object;
     }
 
     /**
