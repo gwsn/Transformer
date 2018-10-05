@@ -45,7 +45,7 @@ abstract class BaseMapping implements MappingInterface
             $properties = $reflection->getProperties();
 
             foreach($properties as $key => $value) {
-                if(!in_array($value->name, $blackList))
+                if(!in_array($value->name, $blacklist))
                     $mapping[$value->name] = $value->name;
 
             }
