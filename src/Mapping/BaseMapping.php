@@ -27,5 +27,32 @@ abstract class BaseMapping implements MappingInterface
         return $this;
     }
 
+    /**
+     * Build a mapping based on properties of a entity.
+     *
+     * @param object $source
+     * @param array $blacklist
+     * @return array
+     */
+    protected function buildMappingOnObject($source = null, array $blacklist = []):array {
+        if(!is_object($source)) {
+            return [];
+        }
 
+        try {
+            $mapping = [];
+            $reflection = new \ReflectionClass($source);
+            $properties = $reflection->getProperties();
+
+            foreach($properties as $key => $value) {
+                if(!in_array($value->name, $blackList))
+                    $mapping[$value->name] = $value->name;
+
+            }
+            return $mapping;
+
+        } catch (\Exception $exception) {
+            return [];
+        }
+    }
 }
