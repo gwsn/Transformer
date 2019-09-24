@@ -156,8 +156,10 @@ class Transformer
      * @param mixed $source
      * @return Object
      */
-    private static function populateObject($output, $source) {
-        $source = json_decode(json_encode($source), true);
+    private static function populateObject($output, $source, bool $normalize = false) {
+        if($normalize) {
+            $source = json_decode(json_encode($source), true);
+        }
 
         foreach($source as $key => $value) {
             $method = self::createMethodNames($key);
